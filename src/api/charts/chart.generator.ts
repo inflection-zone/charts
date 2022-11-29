@@ -117,7 +117,7 @@ export class ChartGenerator {
         const html = pre + dataStr + post;
         Helper.writeTextToFile(html, `${filename}.html`);
         return await htmlTextToPNG(html, options.Width, options.Height, `${filename}.png`);
-    }
+    };
 
     private static extractPrePostTextBlocks(templHtml: string) {
         const cwd = process.cwd();

@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "47c56164-3b8f-4a69-832c-d7830d71e04d",
+		"name": "Charts API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5510218"
+	},
+	"item": [
+		{
+			"name": "Create line chart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Data\": {},\r\n    \"Options\": {}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/charts/line-chart",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"charts",
+						"line-chart"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -4,67 +4,20 @@ import { ErrorHandler } from '../../common/error.handler';
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 export class ChartsValidator {
-    static validateCreateLineChartRequest(requestBody: any): { data: any; chartOptions: any; } | PromiseLike<{ data: any; chartOptions: any; }> {
-        throw new Error('Method not implemented.');
-    }
 
-    static validateCreateRequest = async (requestBody) => {
+    static validateRequest_LineChart = async (requestBody: any) => {
         try {
             const schema = joi.object({
-                Code        : joi.string().max(256).optional(),
-                CategoryId  : joi.number().integer().optional(),
-                Name        : joi.string().max(256).required(),
-                Description : joi.string().optional(),
-                Version     : joi.string().max(32).optional(),
-                OwnerUserId : joi.string() .guid({
-                    version : ['uuidv4']
-                }).optional(),
-                Tags : joi.array().items(joi.string()).optional()
+                Data    : joi.object().optional(),
+                Options : joi.object().optional(),
             });
-            return await schema.validateAsync(requestBody);
+            await schema.validateAsync(requestBody);
+            const data = requestBody.Data;
+            const options = requestBody.Options;
+            return { data, options };
         } catch (error) {
             ErrorHandler.handleValidationError(error);
         }
-    }
-
-    static validateSearchRequest = async (query) => {
-        try {
-            const schema = joi.object({
-                code        : joi.string().max(256).optional(),
-                categoryId  : joi.number().integer().optional(),
-                name        : joi.string().max(256).optional(),
-                version     : joi.string().max(32).optional(),
-                ownerUserId : joi.string().guid({
-                    version : ['uuidv4']
-                }).optional(),
-                tags     : joi.string().optional(),
-                isActive : joi.boolean().optional()
-            });
-            return await schema.validateAsync(query);
-
-        } catch (error) {
-            ErrorHandler.handleValidationError(error);
-        }
-    }
-
-    static validateUpdateRequest = async (requestBody) => {
-        try {
-            const schema = joi.object({
-                Code        : joi.string().max(256).optional(),
-                CategoryId  : joi.number().integer().optional(),
-                Name        : joi.string().max(256).optional(),
-                Description : joi.string().optional(),
-                Version     : joi.string().max(32).optional(),
-                OwnerUserId : joi.string().guid({
-                    version : ['uuidv4']
-                }).optional(),
-                Tags : joi.array().items(joi.string()).optional()
-            });
-            return await schema.validateAsync(requestBody);
-        } catch (error) {
-            ErrorHandler.handleValidationError(error);
-        }
-    }
+    };
 
 }
-///////////////////////////////////////////////////////////////////////////////////////////////
