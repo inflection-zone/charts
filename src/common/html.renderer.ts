@@ -15,15 +15,15 @@ export const htmlTextToPNG = async (htmlText: string, width: number, height: num
     try {
         const generatedFilePath = await getGeneratedFilePath(filename);
 
-        return new Promise<string>( (resolve, reject) => {
+        return new Promise<string>((resolve, reject) => {
             const puppeteerArgs = {
-                args            : ['--no-sandbox'],
-                defaultViewport : {
-                    width             : width,
-                    height            : height,
-                    deviceScaleFactor : 1
+                args: ['--no-sandbox'],
+                defaultViewport: {
+                    width: width,
+                    height: height,
+                    deviceScaleFactor: 1
                 },
-                executablePath : '/usr/bin/chromium-browser'
+                executablePath: '/usr/bin/chromium-browser'
             };
             const osType = Helper.getOSType();
             if (osType === OSType.Windows) {
@@ -31,13 +31,13 @@ export const htmlTextToPNG = async (htmlText: string, width: number, height: num
             }
 
             nodeHtmlToImage({
-                output        : generatedFilePath,
-                html          : htmlText,
-                puppeteerArgs : puppeteerArgs
+                output: generatedFilePath,
+                html: htmlText,
+                puppeteerArgs: puppeteerArgs
             }).then(() => {
-                Logger.instance().log('Imgae file created');
+                Logger.instance().log('Image file created');
                 resolve(generatedFilePath);
-            // eslint-disable-next-line newline-per-chained-call
+                // eslint-disable-next-line newline-per-chained-call
             }).catch(async (error) => {
                 Logger.instance().log(`Error creating image file: ${error.message}`);
                 reject(null);

@@ -1,0 +1,333 @@
+sample data
+
+
+multi-line-chart
+{
+	"Data": [
+		{
+			"x": "2021-04-23",
+			"y": 93.24,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 95.35,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 98.84,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 99.92,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 99.82,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-23",
+			"y": 193.24,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 195.35,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 138.84,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 139.92,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 139.82,
+			"z": "B"
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Colors": [
+			"green",
+			"red"
+		],
+		"Categories": [
+			"A",
+			"B"
+		],
+		"YLabel": "rand_name",
+		"XAxisTimeScaled": true
+	}
+}
+
+simple-bar-chart
+
+{
+	"Data": [
+		{
+			"x": "2021-04-23",
+			"y": 93.24
+		},
+		{
+			"x": "2021-04-24",
+			"y": 95.35
+		},
+		{
+			"x": "2021-04-25",
+			"y": 98.84
+		},
+		{
+			"x": "2021-04-26",
+			"y": 99.92
+		},
+		{
+			"x": "2021-04-29",
+			"y": 99.82
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Color": "red",
+		"YLabel": "rand_name",
+		"XAxisTimeScaled": true
+	}
+}
+
+group-bar-chart
+
+{
+	"Data": [
+		{
+			"x": "2021-04-23",
+			"y": 93.24,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 95.35,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 98.84,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 99.92,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 99.82,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-23",
+			"y": 193.24,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 195.35,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 138.84,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 139.92,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 139.82,
+			"z": "B"
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Colors": [
+			"red",
+			"green"
+		],
+		"Categories": [
+			"A",
+			"B"
+		],
+		"YLabel": "rand_name",
+		"XAxisTimeScaled": true
+	}
+}
+
+stacked bar chart
+			
+{
+	"Data": [
+		{
+			"x": "2021-04-23",
+			"y": 93.24,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 95.35,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 98.84,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 99.92,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 99.82,
+			"z": "A"
+		},
+		{
+			"x": "2021-04-23",
+			"y": 193.24,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-24",
+			"y": 195.35,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-25",
+			"y": 138.84,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-26",
+			"y": 139.92,
+			"z": "B"
+		},
+		{
+			"x": "2021-04-29",
+			"y": 139.82,
+			"z": "B"
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Colors": [
+			"green",
+			"red"
+		],
+		"Categories": [
+			"A",
+			"B"
+		],
+		"YLabel": "rand_name",
+		"XAxisTimeScaled": true
+	}
+}	
+
+donut-chart
+
+{
+	"Data": [
+		{
+			"name": "Yes",
+			"value": 234
+		},
+		{
+			"name": "No",
+			"value": 323
+		},
+		{
+			"name": "Unanswered",
+			"value": 200
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Colors": [
+			"green",
+			"red",
+			"blue"
+		],
+		"Categories": [
+			"Yes",
+			"No",
+			"Unanswered"
+		]
+	}
+}	
+
+pie chart
+
+{
+	"Data": [
+		{
+			"name": "Yes",
+			"value": 234
+		},
+		{
+			"name": "No",
+			"value": 323
+		},
+		{
+			"name": "Unanswered",
+			"value": 200
+		}
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300,
+		"Colors": [
+			"green",
+			"red",
+			"blue"
+		],
+		"Categories": [
+			"Yes",
+			"No",
+			"Unanswered"
+		]
+	}
+}
+
+
+bubble chart
+
+{
+	"Data": [
+			{ "name": "Sunday", 	"value": 93.24 },
+			{ "name": "Monday", 	"value": 125.35 },
+			{ "name": "Tuesday", 	"value": 8.84 },
+			{ "name": "Wednesday", 	"value": 99.92 },
+			{ "name": "Thursday", 	"value": 25.8 },
+			{ "name": "Friday", 	"value": 78.47 },
+			{ "name": "Saturday", 	"value": 34.39 }
+	],
+	"Options": {
+		"Width": 500,
+		"Height": 300
+	}
+}
