@@ -10,16 +10,16 @@ import {
     MultiLineChartOptions,
     CircledNumberChartOptions,
     CircularProgressChartOptions,
-    LinearProgressChartOptions } from "../../domain.types/chart.options";
+    LinearProgressChartOptions
+} from "../../domain.types/chart.options";
 import { htmlTextToPNG } from '../../common/html.renderer';
 import { Helper } from "../../common/helper";
 
-/////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 export class ChartGenerator {
 
-    static createLineChart = async (
-        data: any[], options: LineChartOptions, filename: string): Promise<string|undefined> => {
+    static createLineChart = async (data: any[], options: LineChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'simple.line.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleLineChartTextBlock(data, options);
@@ -27,7 +27,7 @@ export class ChartGenerator {
     };
 
     static createMultiLineChart = async (
-        data: any[], options: MultiLineChartOptions, filename: string): Promise<string|undefined> => {
+        data: any[], options: MultiLineChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'multi.line.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createMultiLineChartTextBlock(data, options);
@@ -35,35 +35,35 @@ export class ChartGenerator {
     };
 
     static createBarChart = async (
-        data: any[], options: BarChartOptions, filename: string): Promise<string|undefined> => {
+        data: any[], options: BarChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'simple.bar.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleBarChartTextBlock(data, options);
         return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options);
     };
 
-    static createGroupBarChart = async (data: any[], options: MultiBarChartOptions, filename: string)
-        : Promise<string|undefined> => {
+    static createGroupBarChart = async (
+        data: any[], options: MultiBarChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'group.bar.chart.html';
         return await ChartGenerator.multiBarChart(templHtml, data, options, filename);
     };
 
-    static createStackedBarChart = async (data: any[], options: MultiBarChartOptions, filename: string)
-    : Promise<string|undefined> => {
+    static createStackedBarChart = async (
+        data: any[], options: MultiBarChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'stacked.bar.chart.html';
         return await ChartGenerator.multiBarChart(templHtml, data, options, filename);
     };
 
-    static createDonutChart = async (data: any[], options: MultiBarChartOptions, filename: string)
-    : Promise<string|undefined> => {
+    static createDonutChart = async (
+        data: any[], options: MultiBarChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'simple.donut.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleDonutChartTextBlock(data, options);
         return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options);
     };
 
-    static createPieChart = async (data: any[], options: MultiBarChartOptions, filename: string)
-    : Promise<string|undefined> => {
+    static createPieChart = async (
+        data: any[], options: PieChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'simple.pie.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleDonutChartTextBlock(data, options);
@@ -71,7 +71,7 @@ export class ChartGenerator {
     };
 
     static createBubbleChart = async (
-        data: any[], options: ChartOptions, filename: string): Promise<string|undefined> => {
+        data: any[], options: ChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'bubble.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createBubbleChartTextBlock(data, options);
@@ -79,7 +79,7 @@ export class ChartGenerator {
     };
 
     static createCalendarChart = async (
-        data: any[], options: ChartOptions, filename: string): Promise<string|undefined> => {
+        data: any[], options: ChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'calendar.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createCalendarChartTextBlock(data, options);
@@ -87,7 +87,7 @@ export class ChartGenerator {
     };
 
     static createCircledNumberChart = async (
-        data: number, options: CircledNumberChartOptions, filename: string): Promise<string|undefined> => {
+        data: number, options: CircledNumberChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'circled.number.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createCircledNumberChartTextBlock(data, options);
@@ -95,7 +95,7 @@ export class ChartGenerator {
     };
 
     static createCircularProgressChart = async (
-        data: number, options: CircularProgressChartOptions, filename: string): Promise<string|undefined> => {
+        data: number, options: CircularProgressChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'circular.progress.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createCircularProgressChartTextBlock(data, options);
@@ -103,7 +103,7 @@ export class ChartGenerator {
     };
 
     static createLinearProgressChart = async (
-        data: number, options: LinearProgressChartOptions, filename: string): Promise<string|undefined> => {
+        data: number, options: LinearProgressChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'linear.progress.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createLinearProgressChartTextBlock(data, options);
@@ -137,7 +137,7 @@ export class ChartGenerator {
         let dataStr = `\n\tconst data = [\n`;
         if (options.XAxisTimeScaled) {
             for (var d of data) {
-                const str = `\t\t{ x: new Date("${d.x?.toISOString()}"), y: ${d.y?.toString()} },\n`;
+                const str = `\t\t{ x: new Date("${d.x}"), y: ${d.y?.toString()} },\n`;
                 dataStr += str;
             }
         }
@@ -168,13 +168,13 @@ export class ChartGenerator {
         let dataStr = `\n\tconst data = [\n`;
         if (options.XAxisTimeScaled) {
             for (var d of data) {
-                const str = `\t\t{ x: new Date("${d.x?.toISOString()}"), y: ${d.y?.toString()} },\n`;
+                const str = `\t\t{ x: new Date("${d.x}"), y: ${d.y?.toString()}, z: "${d.z}"},\n`;
                 dataStr += str;
             }
         }
         else {
             for (var d of data) {
-                const str = `\t\t{ x: ${d.x?.toString()}, y: ${d.y?.toString()} },\n`;
+                const str = `\t\t{ x: ${d.x}, y: ${d.y?.toString()}, z: "${d.z}" },\n`;
                 dataStr += str;
             }
         }
@@ -185,6 +185,7 @@ export class ChartGenerator {
         dataStr += `\tconst fontSize        = "${options.FontSize ?? `12px`}";\n`;
         dataStr += `\tconst categories      = ${JSON.stringify(options.Categories)}\n`;
         dataStr += `\tconst colors          = ${JSON.stringify(options.Colors)}\n`;
+        dataStr += `\tconst yLabel          = "${options.YLabel}"\n`;
         return dataStr;
     }
 
@@ -241,10 +242,11 @@ export class ChartGenerator {
         return dataStr;
     }
 
+
     private static createBubbleChartTextBlock(data: any[], options: ChartOptions) {
         let dataStr = `\n\tconst data = [\n`;
         for (var d of data) {
-            const str = `\t\t{ name: "${d.x?.toString()}", value: ${d.y?.toString()} },\n`;
+            const str = `\t\t{ name: "${d.x?.toString()}", value: ${d.y} },\n`;
             dataStr += str;
         }
         dataStr += `\t];\n\n`;
