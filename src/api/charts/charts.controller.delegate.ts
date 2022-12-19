@@ -112,7 +112,7 @@ export class ChartsControllerDelegate {
 
     createCircledNumberChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_CircledNumberChart(requestBody);
-        const filename = 'donut_chart' + TimeHelper.timestamp(new Date()) + '.png';
+        const filename = 'circled_numbered_chart' + TimeHelper.timestamp(new Date()) + '.png';
         const location = await ChartGenerator.createCircledNumberChart(data, options, filename);
         if (location == null) {
             throw new ApiError('Unable to circled numbered chart!', 400);
@@ -123,7 +123,7 @@ export class ChartsControllerDelegate {
 
     createCircularProgressChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_CircularProgressChart(requestBody);
-        const filename = 'donut_chart' + TimeHelper.timestamp(new Date()) + '.png';
+        const filename = 'circular_progress_chart' + TimeHelper.timestamp(new Date()) + '.png';
         const location = await ChartGenerator.createCircularProgressChart(data, options, filename);
         if (location == null) {
             throw new ApiError('Unable to circular progress chart!', 400);
@@ -134,7 +134,7 @@ export class ChartsControllerDelegate {
 
     createLinearProgressChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_LinearProgressChart(requestBody);
-        const filename = 'donut_chart' + TimeHelper.timestamp(new Date()) + '.png';
+        const filename = 'linear_progress_chart' + TimeHelper.timestamp(new Date()) + '.png';
         const location = await ChartGenerator.createLinearProgressChart(data, options, filename);
         if (location == null) {
             throw new ApiError('Unable to linear progress chart!', 400);

@@ -259,7 +259,8 @@ export class ChartGenerator {
     private static createCalendarChartTextBlock(data: any[], options: CalendarChartOptions) {
         let dataStr = `\n\tconst data = [\n`;
         for (var d of data) {
-            const str = `\t\t{ date: new Date("${d.x?.toISOString().split('T')[0]}"), value: ${d.y?.toString()} },\n`;
+            //const str = `\t\t{ date: new Date("${d.x?.toISOString().split('T')[0]}"), value: ${d.y?.toString()} },\n`;
+            const str = `\t\t{ date: new Date("${d.x}"), value: ${d.y?.toString()} },\n`;
             dataStr += str;
         }
         dataStr += `\t];\n\n`;
