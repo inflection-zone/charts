@@ -93,60 +93,60 @@ export class DefaultChartOptions {
 
     static lineChart = (): LineChartOptions => {
         const opts: LineChartOptions = {
-            Width: 650,
-            Height: 450,
-            FontSize: "14px",
-            Color: "steelblue",
-            XFrom: null,
-            XTo: null,
-            YFrom: null,
-            YTo: null,
-            XAxisTimeScaled: true,
-            YLabel: '',
-            AxisStrokeWidth: 3.5,
-            AxisColor: "#2E4053",
+            Width           : 650,
+            Height          : 450,
+            FontSize        : "14px",
+            Color           : "steelblue",
+            XFrom           : null,
+            XTo             : null,
+            YFrom           : null,
+            YTo             : null,
+            XAxisTimeScaled : true,
+            YLabel          : '',
+            AxisStrokeWidth : 3.5,
+            AxisColor       : "#2E4053",
         };
         return opts;
     };
 
     static circledNumber = (): CircledNumberChartOptions => {
         const opts: CircledNumberChartOptions = {
-            Width: 350,
-            Height: 350,
-            InnerRadius: 135,
-            FontSize: "165px",
-            GradientColor1: '#f2503f',
-            GradientColor2: '#ea0859',
-            PathColor: '#404F70',
-            TextColor: 'slategray',
+            Width          : 350,
+            Height         : 350,
+            InnerRadius    : 135,
+            FontSize       : "165px",
+            GradientColor1 : '#f2503f',
+            GradientColor2 : '#ea0859',
+            PathColor      : '#404F70',
+            TextColor      : 'slategray',
         };
         return opts;
     };
 
     static circularProgress = (): CircularProgressChartOptions => {
         const opts: CircularProgressChartOptions = {
-            Width: 350,
-            Height: 350,
-            InnerRadius: 135,
-            FontSize: "165px",
-            GradientColor1: '#f2503f',
-            GradientColor2: '#ea0859',
-            PathColor: '#404F70',
-            TextColor: 'slategray',
-            SymbolFontSize: "50px",
+            Width          : 350,
+            Height         : 350,
+            InnerRadius    : 135,
+            FontSize       : "165px",
+            GradientColor1 : '#f2503f',
+            GradientColor2 : '#ea0859',
+            PathColor      : '#404F70',
+            TextColor      : 'slategray',
+            SymbolFontSize : "50px",
         };
         return opts;
     };
 
     static linearProgress = (): LinearProgressChartOptions => {
         const opts: LinearProgressChartOptions = {
-            Width: 650,
-            Height: 40,
-            FontSize: "24px",
-            GradientColor1: '#f2503f',
-            GradientColor2: '#ea0859',
-            PathColor: '#404F70',
-            TextColor: 'slategray',
+            Width          : 650,
+            Height         : 40,
+            FontSize       : "24px",
+            GradientColor1 : '#f2503f',
+            GradientColor2 : '#ea0859',
+            PathColor      : '#404F70',
+            TextColor      : 'slategray',
         };
         return opts;
     };
