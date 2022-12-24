@@ -11,15 +11,16 @@ import {
     CircledNumberChartOptions,
     CircularProgressChartOptions,
     LinearProgressChartOptions
-} from "../../domain.types/chart.options";
+} from "./chart.options";
 import { htmlTextToPNG } from '../../common/html.renderer';
 import { Helper } from "../../common/helper";
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////////
 
 export class ChartGenerator {
 
-    static createLineChart = async (data: any[], options: LineChartOptions, filename: string): Promise<string | undefined> => {
+    static createLineChart = async (
+        data: any[], options: LineChartOptions, filename: string): Promise<string | undefined> => {
         const templHtml = 'simple.line.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleLineChartTextBlock(data, options);
@@ -54,16 +55,16 @@ export class ChartGenerator {
         return await ChartGenerator.multiBarChart(templHtml, data, options, filename);
     };
 
-    static createDonutChart = async (
-        data: any[], options: MultiBarChartOptions, filename: string): Promise<string | undefined> => {
+    static createDonutChart = async (data: any[], options: PieChartOptions, filename: string)
+    : Promise<string|undefined> => {
         const templHtml = 'simple.donut.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleDonutChartTextBlock(data, options);
         return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options);
     };
 
-    static createPieChart = async (
-        data: any[], options: PieChartOptions, filename: string): Promise<string | undefined> => {
+    static createPieChart = async (data: any[], options: PieChartOptions, filename: string)
+    : Promise<string|undefined> => {
         const templHtml = 'simple.pie.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createSimpleDonutChartTextBlock(data, options);
@@ -79,7 +80,7 @@ export class ChartGenerator {
     };
 
     static createCalendarChart = async (
-        data: any[], options: ChartOptions, filename: string): Promise<string | undefined> => {
+        data: any[], options: CalendarChartOptions, filename: string): Promise<string|undefined> => {
         const templHtml = 'calendar.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createCalendarChartTextBlock(data, options);
@@ -99,7 +100,7 @@ export class ChartGenerator {
         const templHtml = 'circular.progress.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createCircularProgressChartTextBlock(data, options);
-        return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options);
+        return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options, true);
     };
 
     static createLinearProgressChart = async (
@@ -107,16 +108,18 @@ export class ChartGenerator {
         const templHtml = 'linear.progress.chart.html';
         const { pre, post } = ChartGenerator.extractPrePostTextBlocks(templHtml);
         const dataStr = ChartGenerator.createLinearProgressChartTextBlock(data, options);
-        return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options);
+        return await ChartGenerator.generateChartImage(pre, dataStr, post, filename, options, true);
     };
 
     //#region Common Privates
 
     private static generateChartImage = async (
-        pre: string, dataStr: string, post: string, filename: string, options: BarChartOptions) => {
+        pre: string, dataStr: string, post: string, filename: string, options: ChartOptions, addMargin = false) => {
         const html = pre + dataStr + post;
         Helper.writeTextToFile(html, `${filename}.html`);
-        return await htmlTextToPNG(html, options.Width, options.Height, `${filename}.png`);
+        const w = addMargin ? Math.round(options.Width * 1.20) : options.Width;
+        const h = addMargin ? Math.round(options.Height * 1.20) : options.Height;
+        return await htmlTextToPNG(html, w, h, `${filename}.png`);
     };
 
     private static extractPrePostTextBlocks(templHtml: string) {
@@ -161,6 +164,9 @@ export class ChartGenerator {
         dataStr += `\tconst fontSize        = "${options.FontSize ?? `14px`}";\n`;
         dataStr += `\tconst axisStrokeWidth = ${options.AxisStrokeWidth ?? `2.0`};\n`;
         dataStr += `\tconst axisColor       = "${options.AxisColor ?? `#2E4053`}";\n`;
+        dataStr += `\tconst showXAxis       = ${options.ShowXAxis === false ? `false` : `true`};\n`;
+        dataStr += `\tconst showYAxis       = ${options.ShowYAxis === false ? `false` : `true`};\n`;
+
         return dataStr;
     }
 
@@ -168,13 +174,13 @@ export class ChartGenerator {
         let dataStr = `\n\tconst data = [\n`;
         if (options.XAxisTimeScaled) {
             for (var d of data) {
-                const str = `\t\t{ x: new Date("${d.x}"), y: ${d.y?.toString()}, z: "${d.z}"},\n`;
+                const str = `\t\t{ x: new Date("${d.x}"), y: ${d.y?.toString()}, z: "${d.z?.toString()}"},\n`;
                 dataStr += str;
             }
         }
         else {
             for (var d of data) {
-                const str = `\t\t{ x: ${d.x}, y: ${d.y?.toString()}, z: "${d.z}" },\n`;
+                const str = `\t\t{ x: ${d.x?.toString()}, y: ${d.y?.toString()}, z: "${d.z?.toString()}" },\n`;
                 dataStr += str;
             }
         }
@@ -186,6 +192,9 @@ export class ChartGenerator {
         dataStr += `\tconst categories      = ${JSON.stringify(options.Categories)}\n`;
         dataStr += `\tconst colors          = ${JSON.stringify(options.Colors)}\n`;
         dataStr += `\tconst yLabel          = "${options.YLabel}"\n`;
+        dataStr += `\tconst strokeWidth     = ${options.StrokeWidth}\n`;
+        dataStr += `\tconst showXAxis       = ${options.ShowXAxis === false ? `false` : `true`};\n`;
+        dataStr += `\tconst showYAxis       = ${options.ShowYAxis === false ? `false` : `true`};\n`;
         return dataStr;
     }
 
@@ -201,6 +210,8 @@ export class ChartGenerator {
         dataStr += `\tconst color           = "${options.Color}"\n`;
         dataStr += `\tconst yLabel          = "${options.YLabel}"\n`;
         dataStr += `\tconst fontSize        = "${options.FontSize ?? `11px`}";\n`;
+        dataStr += `\tconst showXAxis       = ${options.ShowXAxis === false ? `false` : `true`};\n`;
+        dataStr += `\tconst showYAxis       = ${options.ShowYAxis === false ? `false` : `true`};\n`;
         return dataStr;
     }
 
@@ -218,6 +229,8 @@ export class ChartGenerator {
         dataStr += `\tconst categories      = ${JSON.stringify(options.Categories)}\n`;
         dataStr += `\tconst colors          = ${JSON.stringify(options.Colors)}\n`;
         dataStr += `\tconst fontSize        = "${options.FontSize ?? `11px`}";\n`;
+        dataStr += `\tconst showXAxis       = ${options.ShowXAxis === false ? `false` : `true`};\n`;
+        dataStr += `\tconst showYAxis       = ${options.ShowYAxis === false ? `false` : `true`};\n`;
         return dataStr;
     }
 
@@ -242,11 +255,10 @@ export class ChartGenerator {
         return dataStr;
     }
 
-
     private static createBubbleChartTextBlock(data: any[], options: ChartOptions) {
         let dataStr = `\n\tconst data = [\n`;
         for (var d of data) {
-            const str = `\t\t{ name: "${d.x?.toString()}", value: ${d.y} },\n`;
+            const str = `\t\t{ name: "${d.name?.toString()}", value: ${d.value?.toString()} },\n`;
             dataStr += str;
         }
         dataStr += `\t];\n\n`;
@@ -290,12 +302,12 @@ export class ChartGenerator {
         dataStr += `\tconst width  = ${options.Width};\n`;
         dataStr += `\tconst height = ${options.Height};\n`;
         dataStr += `\tconst innerRadius = ${options.InnerRadius};\n`;
-        dataStr += `\tconst fontSize = ${options.FontSize};\n`;
-        dataStr += `\tconst symbolFontSize = ${options.SymbolFontSize};\n`;
-        dataStr += `\tconst gradientColor1 = ${options.GradientColor1};\n`;
-        dataStr += `\tconst gradientColor2 = ${options.GradientColor2};\n`;
-        dataStr += `\tconst pathColor = ${options.PathColor};\n`;
-        dataStr += `\tconst textColor = ${options.TextColor};\n`;
+        dataStr += `\tconst fontSize = "${options.FontSize}";\n`;
+        dataStr += `\tconst symbolFontSize = "${options.SymbolFontSize}";\n`;
+        dataStr += `\tconst gradientColor1 = "${options.GradientColor1}";\n`;
+        dataStr += `\tconst gradientColor2 = "${options.GradientColor2}";\n`;
+        dataStr += `\tconst pathColor = "${options.PathColor}";\n`;
+        dataStr += `\tconst textColor = "${options.TextColor}";\n`;
         return dataStr;
     }
 
@@ -304,11 +316,11 @@ export class ChartGenerator {
         dataStr += `\tconst percentage = ${data};\n`;
         dataStr += `\tconst width  = ${options.Width};\n`;
         dataStr += `\tconst height = ${options.Height};\n`;
-        dataStr += `\tconst fontSize = ${options.FontSize};\n`;
-        dataStr += `\tconst gradientColor1 = ${options.GradientColor1};\n`;
-        dataStr += `\tconst gradientColor2 = ${options.GradientColor2};\n`;
-        dataStr += `\tconst pathColor = ${options.PathColor};\n`;
-        dataStr += `\tconst textColor = ${options.TextColor};\n`;
+        dataStr += `\tconst fontSize = "${options.FontSize}";\n`;
+        dataStr += `\tconst gradientColor1 = "${options.GradientColor1}";\n`;
+        dataStr += `\tconst gradientColor2 = "${options.GradientColor2}";\n`;
+        dataStr += `\tconst pathColor = "${options.PathColor}";\n`;
+        dataStr += `\tconst textColor = "${options.TextColor}";\n`;
         return dataStr;
     }
 

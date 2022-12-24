@@ -3,7 +3,6 @@ import { ApiError } from '../../common/api.error';
 import { ChartsValidator as validator } from './charts.validator';
 import { TimeHelper } from '../../common/time.helper';
 import fs from "fs";
-import { loadavg } from 'os';
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +29,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createBarChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_BarChart(requestBody);
@@ -41,7 +40,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createGroupBarChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_GroupBarChart(requestBody);
@@ -52,7 +51,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createStackedBarChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_StackedBarChart(requestBody);
@@ -63,7 +62,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createDonutChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_DonutChart(requestBody);
@@ -74,7 +73,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createPieChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_PieChart(requestBody);
@@ -85,9 +84,8 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
-    
     createBubbleChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_BubbleChart(requestBody);
         const filename = 'bubble_chart' + TimeHelper.timestamp(new Date()) + '.png';
@@ -97,7 +95,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createCalendarChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_CalendarChart(requestBody);
@@ -108,7 +106,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createCircledNumberChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_CircledNumberChart(requestBody);
@@ -119,7 +117,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createCircularProgressChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_CircularProgressChart(requestBody);
@@ -130,7 +128,7 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
+    };
 
     createLinearProgressChart = async (requestBody: any) => {
         const { data, options } = await validator.validateRequest_LinearProgressChart(requestBody);
@@ -141,9 +139,6 @@ export class ChartsControllerDelegate {
         }
         const stream = fs.createReadStream(location);
         return { stream, filename };
-    }
-
-
-
+    };
 
 }
