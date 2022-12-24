@@ -1,7 +1,7 @@
 import express from 'express';
 import { ResponseHandler } from '../../common/response.handler';
 import { ChartsControllerDelegate } from './charts.controller.delegate';
-import mime from 'mime';
+// import mime from 'mime';
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,13 +26,6 @@ export class ChartsController {
             ResponseHandler.handleError(request, response, error);
         }
     };
-
-    //tejas
-
-    helloWorld = (request: express.Request, response: express.Response) => {
-        response.send("Hellow world");
-        console.log("working")
-    }
 
     createMultiLineChart = async (request: express.Request, response: express.Response): Promise<void> => {
         try {
@@ -93,7 +86,7 @@ export class ChartsController {
             ResponseHandler.handleError(request, response, error);
         }
     };
-    
+
     createBubbleChart = async (request: express.Request, response: express.Response): Promise<void> => {
         try {
             const { stream, filename } = await this._delegate.createBubbleChart(request.body);
@@ -103,7 +96,7 @@ export class ChartsController {
             ResponseHandler.handleError(request, response, error);
         }
     };
-    
+
     createCalendarChart = async (request: express.Request, response: express.Response): Promise<void> => {
         try {
             const { stream, filename } = await this._delegate.createCalendarChart(request.body);

@@ -8,10 +8,7 @@ export const register = (app: express.Application): void => {
     const router = express.Router();
     const controller = new ChartsController();
 
-    const lineChart = () => {
-        router.post('/line-chart', controller.createLineChart);
-    };
-
+    router.post('/line-chart', controller.createLineChart);
     router.post('/multi-line-chart', controller.createMultiLineChart);
     router.post('/bar-chart', controller.createBarChart);
     router.post('/group-bar-chart', controller.createGroupBarChart);
